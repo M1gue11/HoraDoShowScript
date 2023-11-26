@@ -3,37 +3,48 @@ from ply.yacc import yacc
 
 # analisador lexico lex
 reservados = ("RECEBA", "DEVOLVA", "HORADOSHOW", "AQUIACABOU", 
-              "SE", "FACA", "ENQUANTO", "FIM", "virgula", "igual", 
-              "mais", "vezes", "menos", "maiorque", "menorque",
-              "maiorouigualque", "menorouigualque")
+              "SE", "ENTAO", "SENAO", "FIMSE", "ENQUANTO",  "FACA", "FIMENQUANTO", "virgula", "igual", 
+              "mais", "vezes", "menos", "maiorque", "menorque", "maiorouigualque", "dividido",
+              "menorouigualque", "EXECUTE", "abrePa", "fechaPa", "ZERO", "comparacao", "PASSE")
 
 t_RECEBA = r'RECEBA'
 t_DEVOLVA = r'DEVOLVA'
 t_HORADOSHOW = r'HORADOSHOW'
 t_AQUIACABOU = r'AQUIACABOU'
-t_SE = r'SE'
 t_FACA = r'FACA'
 t_ENQUANTO = r'ENQUANTO'
-t_FIM = r'FIM'
+t_FIMENQUANTO = r'FIMENQUANTO'
 t_virgula = r','
 t_igual = r'='
 t_menos = r'\-'
 t_mais = r'\+'
 t_vezes = r'\*'
+t_dividido = r'\/'
 t_maiorque = r'>'
 t_menorque = r'<'
 t_maiorouigualque = r'>='
 t_menorouigualque = r'<='
+t_EXECUTE = r'EXECUTE'
+t_abrePa = r'\('
+t_fechaPa = r'\)'
+t_ZERO = r'ZERO'
+t_SE = r'SE'
+t_ENTAO = r'ENTAO'
+t_SENAO = r'SENAO'
+t_FIMSE = r'FIMSE'
+t_comparacao = r'=='
+t_PASSE = r'PASSE'
+
 
 def t_variavel(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    if t.value in reservados: # igual
+    if t.value in reservados:
         t.type = t.value
     return t
 
 def t_numero(t):
-    r'\d+'
-    t.value = int(t.value)
+    r'[+-]?\d+(\.\d+)?'
+    # t.value = int(t.value)
     return t
 
 t_ignore = ' \t\n' # ignora espaços e tabs
@@ -46,26 +57,49 @@ tokens = reservados + ("variavel", "numero")
 
 lexer = lex(debug=True) # construção do lexer
 
-
 # analisador sintatico Yacc
 
 def p_PROGRAM(regras):
     '''
-    PROGRAM : RECEBA VARLIST DEVOLVA VARLIST HORADOSHOW CMDS AQUIACABOU
-        
+    PROGRAM : RECEBA PARAMETROS DEVOLVA VARLIST HORADOSHOW CMDS AQUIACABOU  
     '''
     regras[0] = f"{regras[1]} {regras[2]} {regras[3]} {regras[4]}\n{regras[5]}\n{regras[6]}\n{regras[7]}"
 
+def p_VARIAVELOUEXPRESSAO(regras):
+    '''
+    VARIAVELOUEXPRESSAO : variavel
+                        | EXPRESSAO
+    '''
+    regras[0] = f"{regras[1]}"
+
+def p_VARIAVELOUNUMERO(regras):
+    '''
+    VARIAVELOUNUMERO : variavel
+                     | numero
+    '''
+    regras[0] = f"{regras[1]}"
+
 def p_VARLIST(regras):
     '''
-    VARLIST : variavel virgula VARLIST 
+    VARLIST : variavel virgula VARLIST
             | variavel
     '''
-
     if len(regras) == 2:
         regras[0] = f"{regras[1]}"
     else:
         regras[0] = f"{regras[1]}{regras[2]} {regras[3]}"
+    
+def p_PARAMETROS(regras):
+    '''
+    PARAMETROS : variavel igual numero virgula PARAMETROS
+               | variavel igual numero 
+    '''
+    tam = len(regras)
+    if tam == 4:
+        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
+    else:
+        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}{regras[4]} {regras[5]}"
+
 
 def p_CMDS(regras):
     '''
@@ -79,18 +113,10 @@ def p_CMDS(regras):
 
 def p_OPERACAO(regras):
     '''
-    OPERACAO : variavel mais variavel
-             | variavel mais numero
-             | numero mais variavel
-             | numero mais numero
-             | variavel vezes variavel
-             | variavel vezes numero
-             | numero vezes variavel
-             | numero vezes numero
-             | variavel menos variavel
-             | variavel menos numero
-             | numero menos variavel
-             | numero menos numero
+    OPERACAO : VARIAVELOUNUMERO mais VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO vezes VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO menos VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO dividido VARIAVELOUNUMERO
     '''
     regras[0] = f"{regras[1]} {regras[2]} {regras[3]} "
 
@@ -111,25 +137,53 @@ def p_EXPRESSAO(regras):
              | variavel menorouigualque variavel
              | variavel menorouigualque numero
              | numero menorouigualque variavel
+
+             | numero comparacao variavel
+             | numero comparacao numero
+
     '''
-    if len(regras) == 2:
-        regras[0] = regras[1]
-    else:
-        regras[0] = f"{regras[1]} {regras[2]}"
+    regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
 
 def p_CMD(regras):
     '''
     CMD : variavel igual variavel
-        | variavel igual numero 
+        | variavel igual numero
         | variavel igual OPERACAO
-        | ENQUANTO variavel FACA CMDS FIM
-        | ENQUANTO EXPRESSAO FACA CMDS FIM
+        | ENQUANTO variavel FACA CMDS FIMENQUANTO
+        | ENQUANTO EXPRESSAO FACA CMDS FIMENQUANTO
+        | FUNCAO
+        | CONDICIONAL
+        | PASSE
     '''
     tam = len(regras)
-    if tam == 4:
+    if tam == 2:
+        regras[0] = f"{regras[1]}"
+    elif tam == 4:
         regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
     elif tam == 6:
         regras[0] = f"{regras[1]} {regras[2]} {regras[3]}\n{regras[4]}\n{regras[5]}"
+
+def p_FUNCAO(regras):
+    '''
+    FUNCAO : EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+           | ZERO abrePa variavel fechaPa
+    '''
+    tam = len(regras)
+    if tam == 5:
+        regras[0] = f"{regras[1]}{regras[2]}{regras[3]}{regras[4]}"
+    else:
+        regras[0] = f"{regras[1]}{regras[2]}{regras[3]}{regras[4]} {regras[5]}{regras[6]}"
+
+def p_CONDICIONAL(regras):
+    '''
+    CONDICIONAL : SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+                | SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    '''
+    tam = len(regras)
+    if tam == 6:
+        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}\n{regras[4]}\n{regras[5]}"
+    else:
+        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}\n{regras[4]}\n{regras[5]}\n{regras[6]}\n{regras[7]}"
 
 def p_error(regras):
     print("Erro de sintaxe"+ str(regras))
@@ -137,9 +191,18 @@ def p_error(regras):
 parser = yacc(debug=True) # construção do parser
 result = parser.parse(
     '''
-        RECEBA v1 DEVOLVA v2, v3 
-        HORADOSHOW 
-        ENQUANTO miguel > v3 FACA v1 = v1 + 1 FIM
+        RECEBA X = 2, Y = 3 
+        DEVOLVA Z
+        HORADOSHOW
+        ZERO(X)
+        SE z <= x ENTAO
+        miguel = -5.8 / z
+        EXECUTE(hk, z = z - 1)
+        FIMSE
+        ENQUANTO z FACA
+        PASSE
+        FIMENQUANTO
+        Z=Y
         AQUIACABOU
     '''
 ) # execução do parser
