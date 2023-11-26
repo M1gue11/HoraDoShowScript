@@ -1,20 +1,20 @@
 #include <stdio.h>
 int main(void){
     /*PARAMETROS*/
-    int x = 2, y = 3;
+    int x = 4;
 
     /*VARLIST*/
-    int y, w;
+    int z = 0;
     
-    /*COMANDOS*/ 
-    	int temp = 1;
-	x = y + 1;
-	temp = 7;
-	temp = temp + 22;
-	w = temp;
+    /*COMANDOS*/
+    for(int __i__ = 0; __i__ < x; __i__++){
+	for(int __i__ = 0; __i__ < x; __i__++){
+	z = z + x;
+	}
+	}
 
     /*SAIDA*/ 
-    printf("SAIDA:\n\ty = %d\n\tw = %d\n", y, w);
+    printf("SAIDA:\n\tz = %d\n", z);
     return 0;
 }
     
