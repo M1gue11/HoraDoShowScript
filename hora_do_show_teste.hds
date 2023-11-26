@@ -1,0 +1,9 @@
+RECEBA x = 2, y = 3 
+DEVOLVA y, w
+HORADOSHOW
+temp = 1
+x = y + 1
+temp = 7
+temp = temp + 22
+w = temp
+AQUIACABOU

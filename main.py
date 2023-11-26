@@ -5,7 +5,7 @@ from ply.yacc import yacc
 reservados = ("RECEBA", "DEVOLVA", "HORADOSHOW", "AQUIACABOU", 
               "SE", "ENTAO", "SENAO", "FIMSE", "ENQUANTO",  "FACA", "FIMENQUANTO", "virgula", "igual", 
               "mais", "vezes", "menos", "maiorque", "menorque", "maiorouigualque", "dividido",
-              "menorouigualque", "EXECUTE", "abrePa", "fechaPa", "ZERO", "comparacao", "PASSE")
+              "menorouigualque", "EXECUTE", "abrePa", "fechaPa", "ZERO", "comparacao", "PASSE", "int")
 
 t_RECEBA = r'RECEBA'
 t_DEVOLVA = r'DEVOLVA'
@@ -35,7 +35,6 @@ t_FIMSE = r'FIMSE'
 t_comparacao = r'=='
 t_PASSE = r'PASSE'
 
-
 def t_variavel(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value in reservados:
@@ -59,35 +58,91 @@ lexer = lex(debug=True) # construção do lexer
 
 # analisador sintatico Yacc
 
+variaveis_declaradas = set()
 def p_PROGRAM(regras):
     '''
     PROGRAM : RECEBA PARAMETROS DEVOLVA VARLIST HORADOSHOW CMDS AQUIACABOU  
     '''
-    regras[0] = f"{regras[1]} {regras[2]} {regras[3]} {regras[4]}\n{regras[5]}\n{regras[6]}\n{regras[7]}"
+    parametros = regras[2]
+    varlist = regras[4].split(", ")
+    print("parametros", parametros)
+    print("REGRA 4", regras[4])
+    print("variaveis declaradas", variaveis_declaradas)
+    varlist_str_saida_formato = "".join([f"\\t{var} = %d\\n" for var in varlist])
+    varlist_str_saida_args = "".join([f"{var}, " for var in varlist])
+    # removendo caracteres indesejados
+    varlist_str_saida_args = varlist_str_saida_args[:len(varlist_str_saida_args)-2]
+    # removendo variaveis ja declaradas
+    varlist_nao_declarado = list(set(varlist) - set(variaveis_declaradas))
+    print("varlist nao declarado", varlist_nao_declarado)
+    varlist_nao_declarado_str = ""
+    if len(varlist_nao_declarado) == 1:
+        varlist_nao_declarado_str = varlist_nao_declarado[0]
+        variaveis_declaradas.add(varlist_nao_declarado[0])
+        print("AQUI FOI")
+    else:
+        for i, var in enumerate(varlist_nao_declarado):
+            variaveis_declaradas.add(var)
+            if i == len(varlist_nao_declarado) -1:
+                varlist_nao_declarado_str += var
+            else:
+                varlist_nao_declarado_str += f"{var}, "
+    
+    comandos = regras[6]
+    regras[0] = f'''#include <stdio.h>
+int main(void){{
+    /*PARAMETROS*/
+    int {parametros};
 
-def p_VARIAVELOUEXPRESSAO(regras):
-    '''
-    VARIAVELOUEXPRESSAO : variavel
-                        | EXPRESSAO
-    '''
-    regras[0] = f"{regras[1]}"
+    /*VARLIST*/
+    int {regras[4]};
+    
+    /*COMANDOS*/ 
+    {comandos}
 
-def p_VARIAVELOUNUMERO(regras):
+    /*SAIDA*/ 
+    printf("SAIDA:\\n{varlist_str_saida_formato}", {varlist_str_saida_args});
+    return 0;
+}}
     '''
-    VARIAVELOUNUMERO : variavel
-                     | numero
-    '''
-    regras[0] = f"{regras[1]}"
 
 def p_VARLIST(regras):
     '''
     VARLIST : variavel virgula VARLIST
             | variavel
     '''
+    func = lambda var: var not in variaveis_declaradas
+    variaveis_declaradas.add(regras[1])
+    print("ADICIONEI")
     if len(regras) == 2:
         regras[0] = f"{regras[1]}"
     else:
         regras[0] = f"{regras[1]}{regras[2]} {regras[3]}"
+
+
+def p_VARIAVEL(regras):
+    '''
+    VARIAVEL : variavel
+    '''
+    if regras[1] not in variaveis_declaradas:
+        variaveis_declaradas.add(regras[1])
+        regras[0] = f"int {regras[1]}"
+    else:
+        regras[0] = f"{regras[1]}"
+
+def p_VARIAVELOUEXPRESSAO(regras):
+    '''
+    VARIAVELOUEXPRESSAO : VARIAVEL
+                        | EXPRESSAO
+    '''
+    regras[0] = f"{regras[1]}"
+
+def p_VARIAVELOUNUMERO(regras):
+    '''
+    VARIAVELOUNUMERO : VARIAVEL
+                     | numero
+    '''
+    regras[0] = f"{regras[1]}"
     
 def p_PARAMETROS(regras):
     '''
@@ -95,6 +150,7 @@ def p_PARAMETROS(regras):
                | variavel igual numero 
     '''
     tam = len(regras)
+    variaveis_declaradas.add(regras[1])
     if tam == 4:
         regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
     else:
@@ -111,6 +167,24 @@ def p_CMDS(regras):
     else:
         regras[0] = f"{regras[1]}\n{regras[2]}"
 
+def p_CMD(regras):
+    '''
+    CMD : VARIAVEL igual variavel
+        | VARIAVEL igual numero
+        | VARIAVEL igual OPERACAO
+        | ENQUANTO VARIAVELOUEXPRESSAO FACA CMDS FIMENQUANTO
+        | FUNCAO
+        | CONDICIONAL
+        | PASSE
+    '''
+    tam = len(regras)
+    if tam == 2:
+        regras[0] = f"{regras[1]}"
+    elif tam == 4:
+        regras[0] = f"\t{regras[1]} {regras[2]} {regras[3]};"
+    elif tam == 6:
+        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}\n{regras[4]}\n{regras[5]}"
+
 def p_OPERACAO(regras):
     '''
     OPERACAO : VARIAVELOUNUMERO mais VARIAVELOUNUMERO
@@ -118,7 +192,7 @@ def p_OPERACAO(regras):
              | VARIAVELOUNUMERO menos VARIAVELOUNUMERO
              | VARIAVELOUNUMERO dividido VARIAVELOUNUMERO
     '''
-    regras[0] = f"{regras[1]} {regras[2]} {regras[3]} "
+    regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
 
 def p_EXPRESSAO(regras):
     '''
@@ -143,25 +217,6 @@ def p_EXPRESSAO(regras):
 
     '''
     regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
-
-def p_CMD(regras):
-    '''
-    CMD : variavel igual variavel
-        | variavel igual numero
-        | variavel igual OPERACAO
-        | ENQUANTO variavel FACA CMDS FIMENQUANTO
-        | ENQUANTO EXPRESSAO FACA CMDS FIMENQUANTO
-        | FUNCAO
-        | CONDICIONAL
-        | PASSE
-    '''
-    tam = len(regras)
-    if tam == 2:
-        regras[0] = f"{regras[1]}"
-    elif tam == 4:
-        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
-    elif tam == 6:
-        regras[0] = f"{regras[1]} {regras[2]} {regras[3]}\n{regras[4]}\n{regras[5]}"
 
 def p_FUNCAO(regras):
     '''
@@ -189,22 +244,12 @@ def p_error(regras):
     print("Erro de sintaxe"+ str(regras))
 
 parser = yacc(debug=True) # construção do parser
-result = parser.parse(
-    '''
-        RECEBA X = 2, Y = 3 
-        DEVOLVA Z
-        HORADOSHOW
-        ZERO(X)
-        SE z <= x ENTAO
-        miguel = -5.8 / z
-        EXECUTE(hk, z = z - 1)
-        FIMSE
-        ENQUANTO z FACA
-        PASSE
-        FIMENQUANTO
-        Z=Y
-        AQUIACABOU
-    '''
-) # execução do parser
+with open("hora_do_show_teste.hds", "r") as arquivoLeitura:
+    programa = arquivoLeitura.read()
+result = parser.parse(programa)
 
+with open("programa_hora_do_show.c", "w") as arquivoEscrita:
+    print(result, file=arquivoEscrita)
 print(result)
+print(variaveis_declaradas)
+print("Execução do programa: \n")
