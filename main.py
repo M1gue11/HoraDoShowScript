@@ -190,24 +190,11 @@ def p_OPERACAO(regras):
 
 def p_EXPRESSAO(regras):
     '''
-    EXPRESSAO : variavel maiorque variavel
-             | variavel maiorque numero
-             | numero maiorque variavel
-
-             | variavel menorque variavel
-             | variavel menorque numero
-             | numero menorque variavel
-
-             | variavel maiorouigualque variavel
-             | variavel maiorouigualque numero
-             | numero maiorouigualque variavel
-
-             | variavel menorouigualque variavel
-             | variavel menorouigualque numero
-             | numero menorouigualque variavel
-
-             | numero comparacao variavel
-             | numero comparacao numero
+    EXPRESSAO : VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO menorque VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO
+             | VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO
 
     '''
     regras[0] = f"{regras[1]} {regras[2]} {regras[3]}"
