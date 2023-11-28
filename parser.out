@@ -29,62 +29,53 @@ Rule 19    OPERACAO -> VARIAVELOUNUMERO mais VARIAVELOUNUMERO
 Rule 20    OPERACAO -> VARIAVELOUNUMERO vezes VARIAVELOUNUMERO
 Rule 21    OPERACAO -> VARIAVELOUNUMERO menos VARIAVELOUNUMERO
 Rule 22    OPERACAO -> VARIAVELOUNUMERO dividido VARIAVELOUNUMERO
-Rule 23    EXPRESSAO -> variavel maiorque variavel
-Rule 24    EXPRESSAO -> variavel maiorque numero
-Rule 25    EXPRESSAO -> numero maiorque variavel
-Rule 26    EXPRESSAO -> variavel menorque variavel
-Rule 27    EXPRESSAO -> variavel menorque numero
-Rule 28    EXPRESSAO -> numero menorque variavel
-Rule 29    EXPRESSAO -> variavel maiorouigualque variavel
-Rule 30    EXPRESSAO -> variavel maiorouigualque numero
-Rule 31    EXPRESSAO -> numero maiorouigualque variavel
-Rule 32    EXPRESSAO -> variavel menorouigualque variavel
-Rule 33    EXPRESSAO -> variavel menorouigualque numero
-Rule 34    EXPRESSAO -> numero menorouigualque variavel
-Rule 35    EXPRESSAO -> numero comparacao variavel
-Rule 36    EXPRESSAO -> numero comparacao numero
-Rule 37    FUNCAO -> ZERO abrePa variavel fechaPa
-Rule 38    FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-Rule 39    CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-Rule 40    CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+Rule 23    EXPRESSAO -> VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO
+Rule 24    EXPRESSAO -> VARIAVELOUNUMERO menorque VARIAVELOUNUMERO
+Rule 25    EXPRESSAO -> VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO
+Rule 26    EXPRESSAO -> VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO
+Rule 27    EXPRESSAO -> VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO
+Rule 28    FUNCAO -> ZERO abrePa variavel fechaPa
+Rule 29    FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+Rule 30    CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+Rule 31    CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
 Terminals, with rules where they appear
 
 AQUIACABOU           : 1
 DEVOLVA              : 1
 ENQUANTO             : 16
-ENTAO                : 39 40
-EXECUTE              : 38
+ENTAO                : 30 31
+EXECUTE              : 29
 FACA                 : 16
 FIMENQUANTO          : 16
-FIMSE                : 39 40
+FIMSE                : 30 31
 HORADOSHOW           : 1
 RECEBA               : 1
-SE                   : 39 40
-SENAO                : 40
-ZERO                 : 37
-abrePa               : 37 38
-comparacao           : 35 36
+SE                   : 30 31
+SENAO                : 31
+ZERO                 : 28
+abrePa               : 28 29
+comparacao           : 27
 dividido             : 22
 error                : 
-fechaPa              : 37 38
+fechaPa              : 28 29
 igual                : 9 10 13 14 15
 int                  : 
-maiorouigualque      : 29 30 31
-maiorque             : 23 24 25
+maiorouigualque      : 25
+maiorque             : 23
 mais                 : 19
-menorouigualque      : 32 33 34
-menorque             : 26 27 28
+menorouigualque      : 26
+menorque             : 24
 menos                : 21
-numero               : 8 9 10 14 24 25 27 28 30 31 33 34 35 36 36
-variavel             : 2 3 4 9 10 13 23 23 24 25 26 26 27 28 29 29 30 31 32 32 33 34 35 37
+numero               : 8 9 10 14
+variavel             : 2 3 4 9 10 13 28
 vezes                : 20
-virgula              : 2 9 38
+virgula              : 2 9 29
 
 Nonterminals, with rules where they appear
 
 CMD                  : 11 12
-CMDS                 : 1 11 16 38 39 40 40
+CMDS                 : 1 11 16 29 30 31 31
 CONDICIONAL          : 18
 EXPRESSAO            : 6
 FUNCAO               : 17
@@ -92,8 +83,8 @@ OPERACAO             : 15
 PARAMETROS           : 1 9
 PROGRAM              : 0
 VARIAVEL             : 5 7 13 14 15
-VARIAVELOUEXPRESSAO  : 16 39 40
-VARIAVELOUNUMERO     : 19 19 20 20 21 21 22 22 38
+VARIAVELOUEXPRESSAO  : 16 30 31
+VARIAVELOUNUMERO     : 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 29
 VARLIST              : 1 2
 
 
@@ -192,10 +183,10 @@ state 10
     (17) CMD -> . FUNCAO
     (18) CMD -> . CONDICIONAL
     (4) VARIAVEL -> . variavel
-    (37) FUNCAO -> . ZERO abrePa variavel fechaPa
-    (38) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-    (39) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (28) FUNCAO -> . ZERO abrePa variavel fechaPa
+    (29) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (30) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
     ENQUANTO        shift and go to state 17
     variavel        shift and go to state 16
@@ -249,10 +240,10 @@ state 14
     (17) CMD -> . FUNCAO
     (18) CMD -> . CONDICIONAL
     (4) VARIAVEL -> . variavel
-    (37) FUNCAO -> . ZERO abrePa variavel fechaPa
-    (38) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-    (39) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (28) FUNCAO -> . ZERO abrePa variavel fechaPa
+    (29) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (30) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
     AQUIACABOU      reduce using rule 12 (CMDS -> CMD .)
     FIMENQUANTO     reduce using rule 12 (CMDS -> CMD .)
@@ -285,6 +276,13 @@ state 16
     (4) VARIAVEL -> variavel .
 
     igual           reduce using rule 4 (VARIAVEL -> variavel .)
+    FACA            reduce using rule 4 (VARIAVEL -> variavel .)
+    maiorque        reduce using rule 4 (VARIAVEL -> variavel .)
+    menorque        reduce using rule 4 (VARIAVEL -> variavel .)
+    maiorouigualque reduce using rule 4 (VARIAVEL -> variavel .)
+    menorouigualque reduce using rule 4 (VARIAVEL -> variavel .)
+    comparacao      reduce using rule 4 (VARIAVEL -> variavel .)
+    ENTAO           reduce using rule 4 (VARIAVEL -> variavel .)
     virgula         reduce using rule 4 (VARIAVEL -> variavel .)
     ENQUANTO        reduce using rule 4 (VARIAVEL -> variavel .)
     variavel        reduce using rule 4 (VARIAVEL -> variavel .)
@@ -304,27 +302,21 @@ state 17
     (5) VARIAVELOUEXPRESSAO -> . VARIAVEL
     (6) VARIAVELOUEXPRESSAO -> . EXPRESSAO
     (4) VARIAVEL -> . variavel
-    (23) EXPRESSAO -> . variavel maiorque variavel
-    (24) EXPRESSAO -> . variavel maiorque numero
-    (25) EXPRESSAO -> . numero maiorque variavel
-    (26) EXPRESSAO -> . variavel menorque variavel
-    (27) EXPRESSAO -> . variavel menorque numero
-    (28) EXPRESSAO -> . numero menorque variavel
-    (29) EXPRESSAO -> . variavel maiorouigualque variavel
-    (30) EXPRESSAO -> . variavel maiorouigualque numero
-    (31) EXPRESSAO -> . numero maiorouigualque variavel
-    (32) EXPRESSAO -> . variavel menorouigualque variavel
-    (33) EXPRESSAO -> . variavel menorouigualque numero
-    (34) EXPRESSAO -> . numero menorouigualque variavel
-    (35) EXPRESSAO -> . numero comparacao variavel
-    (36) EXPRESSAO -> . numero comparacao numero
+    (23) EXPRESSAO -> . VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO
+    (24) EXPRESSAO -> . VARIAVELOUNUMERO menorque VARIAVELOUNUMERO
+    (25) EXPRESSAO -> . VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO
+    (26) EXPRESSAO -> . VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO
+    (27) EXPRESSAO -> . VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
 
-    variavel        shift and go to state 31
+    variavel        shift and go to state 16
     numero          shift and go to state 32
 
     VARIAVELOUEXPRESSAO            shift and go to state 28
     VARIAVEL                       shift and go to state 29
     EXPRESSAO                      shift and go to state 30
+    VARIAVELOUNUMERO               shift and go to state 31
 
 state 18
 
@@ -360,46 +352,40 @@ state 19
 
 state 20
 
-    (37) FUNCAO -> ZERO . abrePa variavel fechaPa
+    (28) FUNCAO -> ZERO . abrePa variavel fechaPa
 
     abrePa          shift and go to state 33
 
 
 state 21
 
-    (38) FUNCAO -> EXECUTE . abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (29) FUNCAO -> EXECUTE . abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
 
     abrePa          shift and go to state 34
 
 
 state 22
 
-    (39) CONDICIONAL -> SE . VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> SE . VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (30) CONDICIONAL -> SE . VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> SE . VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
     (5) VARIAVELOUEXPRESSAO -> . VARIAVEL
     (6) VARIAVELOUEXPRESSAO -> . EXPRESSAO
     (4) VARIAVEL -> . variavel
-    (23) EXPRESSAO -> . variavel maiorque variavel
-    (24) EXPRESSAO -> . variavel maiorque numero
-    (25) EXPRESSAO -> . numero maiorque variavel
-    (26) EXPRESSAO -> . variavel menorque variavel
-    (27) EXPRESSAO -> . variavel menorque numero
-    (28) EXPRESSAO -> . numero menorque variavel
-    (29) EXPRESSAO -> . variavel maiorouigualque variavel
-    (30) EXPRESSAO -> . variavel maiorouigualque numero
-    (31) EXPRESSAO -> . numero maiorouigualque variavel
-    (32) EXPRESSAO -> . variavel menorouigualque variavel
-    (33) EXPRESSAO -> . variavel menorouigualque numero
-    (34) EXPRESSAO -> . numero menorouigualque variavel
-    (35) EXPRESSAO -> . numero comparacao variavel
-    (36) EXPRESSAO -> . numero comparacao numero
+    (23) EXPRESSAO -> . VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO
+    (24) EXPRESSAO -> . VARIAVELOUNUMERO menorque VARIAVELOUNUMERO
+    (25) EXPRESSAO -> . VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO
+    (26) EXPRESSAO -> . VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO
+    (27) EXPRESSAO -> . VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
 
-    variavel        shift and go to state 31
+    variavel        shift and go to state 16
     numero          shift and go to state 32
 
     VARIAVELOUEXPRESSAO            shift and go to state 35
     VARIAVEL                       shift and go to state 29
     EXPRESSAO                      shift and go to state 30
+    VARIAVELOUNUMERO               shift and go to state 31
 
 state 23
 
@@ -463,9 +449,15 @@ state 28
 state 29
 
     (5) VARIAVELOUEXPRESSAO -> VARIAVEL .
+    (7) VARIAVELOUNUMERO -> VARIAVEL .
 
     FACA            reduce using rule 5 (VARIAVELOUEXPRESSAO -> VARIAVEL .)
     ENTAO           reduce using rule 5 (VARIAVELOUEXPRESSAO -> VARIAVEL .)
+    maiorque        reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
+    menorque        reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
+    maiorouigualque reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
+    menorouigualque reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
+    comparacao      reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
 
 
 state 30
@@ -478,66 +470,69 @@ state 30
 
 state 31
 
-    (4) VARIAVEL -> variavel .
-    (23) EXPRESSAO -> variavel . maiorque variavel
-    (24) EXPRESSAO -> variavel . maiorque numero
-    (26) EXPRESSAO -> variavel . menorque variavel
-    (27) EXPRESSAO -> variavel . menorque numero
-    (29) EXPRESSAO -> variavel . maiorouigualque variavel
-    (30) EXPRESSAO -> variavel . maiorouigualque numero
-    (32) EXPRESSAO -> variavel . menorouigualque variavel
-    (33) EXPRESSAO -> variavel . menorouigualque numero
+    (23) EXPRESSAO -> VARIAVELOUNUMERO . maiorque VARIAVELOUNUMERO
+    (24) EXPRESSAO -> VARIAVELOUNUMERO . menorque VARIAVELOUNUMERO
+    (25) EXPRESSAO -> VARIAVELOUNUMERO . maiorouigualque VARIAVELOUNUMERO
+    (26) EXPRESSAO -> VARIAVELOUNUMERO . menorouigualque VARIAVELOUNUMERO
+    (27) EXPRESSAO -> VARIAVELOUNUMERO . comparacao VARIAVELOUNUMERO
 
-    FACA            reduce using rule 4 (VARIAVEL -> variavel .)
-    ENTAO           reduce using rule 4 (VARIAVEL -> variavel .)
     maiorque        shift and go to state 42
     menorque        shift and go to state 43
     maiorouigualque shift and go to state 44
     menorouigualque shift and go to state 45
+    comparacao      shift and go to state 46
 
 
 state 32
 
-    (25) EXPRESSAO -> numero . maiorque variavel
-    (28) EXPRESSAO -> numero . menorque variavel
-    (31) EXPRESSAO -> numero . maiorouigualque variavel
-    (34) EXPRESSAO -> numero . menorouigualque variavel
-    (35) EXPRESSAO -> numero . comparacao variavel
-    (36) EXPRESSAO -> numero . comparacao numero
+    (8) VARIAVELOUNUMERO -> numero .
 
-    maiorque        shift and go to state 46
-    menorque        shift and go to state 47
-    maiorouigualque shift and go to state 48
-    menorouigualque shift and go to state 49
-    comparacao      shift and go to state 50
+    maiorque        reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    menorque        reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    maiorouigualque reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    menorouigualque reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    comparacao      reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    virgula         reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    FACA            reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    ENTAO           reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    ENQUANTO        reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    variavel        reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    ZERO            reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    EXECUTE         reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    SE              reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    AQUIACABOU      reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    FIMENQUANTO     reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    FIMSE           reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    SENAO           reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
+    fechaPa         reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
 
 
 state 33
 
-    (37) FUNCAO -> ZERO abrePa . variavel fechaPa
+    (28) FUNCAO -> ZERO abrePa . variavel fechaPa
 
-    variavel        shift and go to state 51
+    variavel        shift and go to state 47
 
 
 state 34
 
-    (38) FUNCAO -> EXECUTE abrePa . VARIAVELOUNUMERO virgula CMDS fechaPa
+    (29) FUNCAO -> EXECUTE abrePa . VARIAVELOUNUMERO virgula CMDS fechaPa
     (7) VARIAVELOUNUMERO -> . VARIAVEL
     (8) VARIAVELOUNUMERO -> . numero
     (4) VARIAVEL -> . variavel
 
-    numero          shift and go to state 53
+    numero          shift and go to state 32
     variavel        shift and go to state 16
 
-    VARIAVELOUNUMERO               shift and go to state 52
+    VARIAVELOUNUMERO               shift and go to state 48
     VARIAVEL                       shift and go to state 36
 
 state 35
 
-    (39) CONDICIONAL -> SE VARIAVELOUEXPRESSAO . ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> SE VARIAVELOUEXPRESSAO . ENTAO CMDS SENAO CMDS FIMSE
+    (30) CONDICIONAL -> SE VARIAVELOUEXPRESSAO . ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> SE VARIAVELOUEXPRESSAO . ENTAO CMDS SENAO CMDS FIMSE
 
-    ENTAO           shift and go to state 54
+    ENTAO           shift and go to state 49
 
 
 state 36
@@ -549,6 +544,8 @@ state 36
     menos           reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
     dividido        reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
     virgula         reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
+    FACA            reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
+    ENTAO           reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
     ENQUANTO        reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
     variavel        reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
     ZERO            reduce using rule 7 (VARIAVELOUNUMERO -> VARIAVEL .)
@@ -626,10 +623,10 @@ state 40
     (21) OPERACAO -> VARIAVELOUNUMERO . menos VARIAVELOUNUMERO
     (22) OPERACAO -> VARIAVELOUNUMERO . dividido VARIAVELOUNUMERO
 
-    mais            shift and go to state 55
-    vezes           shift and go to state 56
-    menos           shift and go to state 57
-    dividido        shift and go to state 58
+    mais            shift and go to state 50
+    vezes           shift and go to state 51
+    menos           shift and go to state 52
+    dividido        shift and go to state 53
 
 
 state 41
@@ -644,10 +641,10 @@ state 41
     (17) CMD -> . FUNCAO
     (18) CMD -> . CONDICIONAL
     (4) VARIAVEL -> . variavel
-    (37) FUNCAO -> . ZERO abrePa variavel fechaPa
-    (38) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-    (39) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (28) FUNCAO -> . ZERO abrePa variavel fechaPa
+    (29) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (30) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
     ENQUANTO        shift and go to state 17
     variavel        shift and go to state 16
@@ -655,7 +652,7 @@ state 41
     EXECUTE         shift and go to state 21
     SE              shift and go to state 22
 
-    CMDS                           shift and go to state 59
+    CMDS                           shift and go to state 54
     CMD                            shift and go to state 14
     VARIAVEL                       shift and go to state 15
     FUNCAO                         shift and go to state 18
@@ -663,112 +660,87 @@ state 41
 
 state 42
 
-    (23) EXPRESSAO -> variavel maiorque . variavel
-    (24) EXPRESSAO -> variavel maiorque . numero
+    (23) EXPRESSAO -> VARIAVELOUNUMERO maiorque . VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
+    (4) VARIAVEL -> . variavel
 
-    variavel        shift and go to state 60
-    numero          shift and go to state 61
+    numero          shift and go to state 32
+    variavel        shift and go to state 16
 
+    VARIAVELOUNUMERO               shift and go to state 55
+    VARIAVEL                       shift and go to state 36
 
 state 43
 
-    (26) EXPRESSAO -> variavel menorque . variavel
-    (27) EXPRESSAO -> variavel menorque . numero
+    (24) EXPRESSAO -> VARIAVELOUNUMERO menorque . VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
+    (4) VARIAVEL -> . variavel
 
-    variavel        shift and go to state 62
-    numero          shift and go to state 63
+    numero          shift and go to state 32
+    variavel        shift and go to state 16
 
+    VARIAVELOUNUMERO               shift and go to state 56
+    VARIAVEL                       shift and go to state 36
 
 state 44
 
-    (29) EXPRESSAO -> variavel maiorouigualque . variavel
-    (30) EXPRESSAO -> variavel maiorouigualque . numero
+    (25) EXPRESSAO -> VARIAVELOUNUMERO maiorouigualque . VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
+    (4) VARIAVEL -> . variavel
 
-    variavel        shift and go to state 64
-    numero          shift and go to state 65
+    numero          shift and go to state 32
+    variavel        shift and go to state 16
 
+    VARIAVELOUNUMERO               shift and go to state 57
+    VARIAVEL                       shift and go to state 36
 
 state 45
 
-    (32) EXPRESSAO -> variavel menorouigualque . variavel
-    (33) EXPRESSAO -> variavel menorouigualque . numero
+    (26) EXPRESSAO -> VARIAVELOUNUMERO menorouigualque . VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
+    (4) VARIAVEL -> . variavel
 
-    variavel        shift and go to state 66
-    numero          shift and go to state 67
+    numero          shift and go to state 32
+    variavel        shift and go to state 16
 
+    VARIAVELOUNUMERO               shift and go to state 58
+    VARIAVEL                       shift and go to state 36
 
 state 46
 
-    (25) EXPRESSAO -> numero maiorque . variavel
+    (27) EXPRESSAO -> VARIAVELOUNUMERO comparacao . VARIAVELOUNUMERO
+    (7) VARIAVELOUNUMERO -> . VARIAVEL
+    (8) VARIAVELOUNUMERO -> . numero
+    (4) VARIAVEL -> . variavel
 
-    variavel        shift and go to state 68
+    numero          shift and go to state 32
+    variavel        shift and go to state 16
 
+    VARIAVELOUNUMERO               shift and go to state 59
+    VARIAVEL                       shift and go to state 36
 
 state 47
 
-    (28) EXPRESSAO -> numero menorque . variavel
+    (28) FUNCAO -> ZERO abrePa variavel . fechaPa
 
-    variavel        shift and go to state 69
+    fechaPa         shift and go to state 60
 
 
 state 48
 
-    (31) EXPRESSAO -> numero maiorouigualque . variavel
+    (29) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO . virgula CMDS fechaPa
 
-    variavel        shift and go to state 70
+    virgula         shift and go to state 61
 
 
 state 49
 
-    (34) EXPRESSAO -> numero menorouigualque . variavel
-
-    variavel        shift and go to state 71
-
-
-state 50
-
-    (35) EXPRESSAO -> numero comparacao . variavel
-    (36) EXPRESSAO -> numero comparacao . numero
-
-    variavel        shift and go to state 73
-    numero          shift and go to state 72
-
-
-state 51
-
-    (37) FUNCAO -> ZERO abrePa variavel . fechaPa
-
-    fechaPa         shift and go to state 74
-
-
-state 52
-
-    (38) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO . virgula CMDS fechaPa
-
-    virgula         shift and go to state 75
-
-
-state 53
-
-    (8) VARIAVELOUNUMERO -> numero .
-
-    virgula         reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    ENQUANTO        reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    variavel        reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    ZERO            reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    EXECUTE         reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    SE              reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    AQUIACABOU      reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    FIMENQUANTO     reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    FIMSE           reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    SENAO           reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-    fechaPa         reduce using rule 8 (VARIAVELOUNUMERO -> numero .)
-
-
-state 54
-
-    (39) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO . CMDS FIMSE
-    (40) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO . CMDS SENAO CMDS FIMSE
+    (30) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO . CMDS FIMSE
+    (31) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO . CMDS SENAO CMDS FIMSE
     (11) CMDS -> . CMD CMDS
     (12) CMDS -> . CMD
     (13) CMD -> . VARIAVEL igual variavel
@@ -778,10 +750,10 @@ state 54
     (17) CMD -> . FUNCAO
     (18) CMD -> . CONDICIONAL
     (4) VARIAVEL -> . variavel
-    (37) FUNCAO -> . ZERO abrePa variavel fechaPa
-    (38) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-    (39) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (28) FUNCAO -> . ZERO abrePa variavel fechaPa
+    (29) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (30) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
     ENQUANTO        shift and go to state 17
     variavel        shift and go to state 16
@@ -789,202 +761,130 @@ state 54
     EXECUTE         shift and go to state 21
     SE              shift and go to state 22
 
-    CMDS                           shift and go to state 76
+    CMDS                           shift and go to state 62
     CMD                            shift and go to state 14
     VARIAVEL                       shift and go to state 15
     FUNCAO                         shift and go to state 18
     CONDICIONAL                    shift and go to state 19
 
-state 55
+state 50
 
     (19) OPERACAO -> VARIAVELOUNUMERO mais . VARIAVELOUNUMERO
     (7) VARIAVELOUNUMERO -> . VARIAVEL
     (8) VARIAVELOUNUMERO -> . numero
     (4) VARIAVEL -> . variavel
 
-    numero          shift and go to state 53
+    numero          shift and go to state 32
     variavel        shift and go to state 16
 
-    VARIAVELOUNUMERO               shift and go to state 77
+    VARIAVELOUNUMERO               shift and go to state 63
     VARIAVEL                       shift and go to state 36
 
-state 56
+state 51
 
     (20) OPERACAO -> VARIAVELOUNUMERO vezes . VARIAVELOUNUMERO
     (7) VARIAVELOUNUMERO -> . VARIAVEL
     (8) VARIAVELOUNUMERO -> . numero
     (4) VARIAVEL -> . variavel
 
-    numero          shift and go to state 53
+    numero          shift and go to state 32
     variavel        shift and go to state 16
 
-    VARIAVELOUNUMERO               shift and go to state 78
+    VARIAVELOUNUMERO               shift and go to state 64
     VARIAVEL                       shift and go to state 36
 
-state 57
+state 52
 
     (21) OPERACAO -> VARIAVELOUNUMERO menos . VARIAVELOUNUMERO
     (7) VARIAVELOUNUMERO -> . VARIAVEL
     (8) VARIAVELOUNUMERO -> . numero
     (4) VARIAVEL -> . variavel
 
-    numero          shift and go to state 53
+    numero          shift and go to state 32
     variavel        shift and go to state 16
 
-    VARIAVELOUNUMERO               shift and go to state 79
+    VARIAVELOUNUMERO               shift and go to state 65
     VARIAVEL                       shift and go to state 36
 
-state 58
+state 53
 
     (22) OPERACAO -> VARIAVELOUNUMERO dividido . VARIAVELOUNUMERO
     (7) VARIAVELOUNUMERO -> . VARIAVEL
     (8) VARIAVELOUNUMERO -> . numero
     (4) VARIAVEL -> . variavel
 
-    numero          shift and go to state 53
+    numero          shift and go to state 32
     variavel        shift and go to state 16
 
-    VARIAVELOUNUMERO               shift and go to state 80
+    VARIAVELOUNUMERO               shift and go to state 66
     VARIAVEL                       shift and go to state 36
 
-state 59
+state 54
 
     (16) CMD -> ENQUANTO VARIAVELOUEXPRESSAO FACA CMDS . FIMENQUANTO
 
-    FIMENQUANTO     shift and go to state 81
+    FIMENQUANTO     shift and go to state 67
+
+
+state 55
+
+    (23) EXPRESSAO -> VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO .
+
+    FACA            reduce using rule 23 (EXPRESSAO -> VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO .)
+    ENTAO           reduce using rule 23 (EXPRESSAO -> VARIAVELOUNUMERO maiorque VARIAVELOUNUMERO .)
+
+
+state 56
+
+    (24) EXPRESSAO -> VARIAVELOUNUMERO menorque VARIAVELOUNUMERO .
+
+    FACA            reduce using rule 24 (EXPRESSAO -> VARIAVELOUNUMERO menorque VARIAVELOUNUMERO .)
+    ENTAO           reduce using rule 24 (EXPRESSAO -> VARIAVELOUNUMERO menorque VARIAVELOUNUMERO .)
+
+
+state 57
+
+    (25) EXPRESSAO -> VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO .
+
+    FACA            reduce using rule 25 (EXPRESSAO -> VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO .)
+    ENTAO           reduce using rule 25 (EXPRESSAO -> VARIAVELOUNUMERO maiorouigualque VARIAVELOUNUMERO .)
+
+
+state 58
+
+    (26) EXPRESSAO -> VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO .
+
+    FACA            reduce using rule 26 (EXPRESSAO -> VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO .)
+    ENTAO           reduce using rule 26 (EXPRESSAO -> VARIAVELOUNUMERO menorouigualque VARIAVELOUNUMERO .)
+
+
+state 59
+
+    (27) EXPRESSAO -> VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO .
+
+    FACA            reduce using rule 27 (EXPRESSAO -> VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO .)
+    ENTAO           reduce using rule 27 (EXPRESSAO -> VARIAVELOUNUMERO comparacao VARIAVELOUNUMERO .)
 
 
 state 60
 
-    (23) EXPRESSAO -> variavel maiorque variavel .
+    (28) FUNCAO -> ZERO abrePa variavel fechaPa .
 
-    FACA            reduce using rule 23 (EXPRESSAO -> variavel maiorque variavel .)
-    ENTAO           reduce using rule 23 (EXPRESSAO -> variavel maiorque variavel .)
+    ENQUANTO        reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    variavel        reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    ZERO            reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    EXECUTE         reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    SE              reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    AQUIACABOU      reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    FIMENQUANTO     reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    FIMSE           reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    SENAO           reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
+    fechaPa         reduce using rule 28 (FUNCAO -> ZERO abrePa variavel fechaPa .)
 
 
 state 61
 
-    (24) EXPRESSAO -> variavel maiorque numero .
-
-    FACA            reduce using rule 24 (EXPRESSAO -> variavel maiorque numero .)
-    ENTAO           reduce using rule 24 (EXPRESSAO -> variavel maiorque numero .)
-
-
-state 62
-
-    (26) EXPRESSAO -> variavel menorque variavel .
-
-    FACA            reduce using rule 26 (EXPRESSAO -> variavel menorque variavel .)
-    ENTAO           reduce using rule 26 (EXPRESSAO -> variavel menorque variavel .)
-
-
-state 63
-
-    (27) EXPRESSAO -> variavel menorque numero .
-
-    FACA            reduce using rule 27 (EXPRESSAO -> variavel menorque numero .)
-    ENTAO           reduce using rule 27 (EXPRESSAO -> variavel menorque numero .)
-
-
-state 64
-
-    (29) EXPRESSAO -> variavel maiorouigualque variavel .
-
-    FACA            reduce using rule 29 (EXPRESSAO -> variavel maiorouigualque variavel .)
-    ENTAO           reduce using rule 29 (EXPRESSAO -> variavel maiorouigualque variavel .)
-
-
-state 65
-
-    (30) EXPRESSAO -> variavel maiorouigualque numero .
-
-    FACA            reduce using rule 30 (EXPRESSAO -> variavel maiorouigualque numero .)
-    ENTAO           reduce using rule 30 (EXPRESSAO -> variavel maiorouigualque numero .)
-
-
-state 66
-
-    (32) EXPRESSAO -> variavel menorouigualque variavel .
-
-    FACA            reduce using rule 32 (EXPRESSAO -> variavel menorouigualque variavel .)
-    ENTAO           reduce using rule 32 (EXPRESSAO -> variavel menorouigualque variavel .)
-
-
-state 67
-
-    (33) EXPRESSAO -> variavel menorouigualque numero .
-
-    FACA            reduce using rule 33 (EXPRESSAO -> variavel menorouigualque numero .)
-    ENTAO           reduce using rule 33 (EXPRESSAO -> variavel menorouigualque numero .)
-
-
-state 68
-
-    (25) EXPRESSAO -> numero maiorque variavel .
-
-    FACA            reduce using rule 25 (EXPRESSAO -> numero maiorque variavel .)
-    ENTAO           reduce using rule 25 (EXPRESSAO -> numero maiorque variavel .)
-
-
-state 69
-
-    (28) EXPRESSAO -> numero menorque variavel .
-
-    FACA            reduce using rule 28 (EXPRESSAO -> numero menorque variavel .)
-    ENTAO           reduce using rule 28 (EXPRESSAO -> numero menorque variavel .)
-
-
-state 70
-
-    (31) EXPRESSAO -> numero maiorouigualque variavel .
-
-    FACA            reduce using rule 31 (EXPRESSAO -> numero maiorouigualque variavel .)
-    ENTAO           reduce using rule 31 (EXPRESSAO -> numero maiorouigualque variavel .)
-
-
-state 71
-
-    (34) EXPRESSAO -> numero menorouigualque variavel .
-
-    FACA            reduce using rule 34 (EXPRESSAO -> numero menorouigualque variavel .)
-    ENTAO           reduce using rule 34 (EXPRESSAO -> numero menorouigualque variavel .)
-
-
-state 72
-
-    (36) EXPRESSAO -> numero comparacao numero .
-
-    FACA            reduce using rule 36 (EXPRESSAO -> numero comparacao numero .)
-    ENTAO           reduce using rule 36 (EXPRESSAO -> numero comparacao numero .)
-
-
-state 73
-
-    (35) EXPRESSAO -> numero comparacao variavel .
-
-    FACA            reduce using rule 35 (EXPRESSAO -> numero comparacao variavel .)
-    ENTAO           reduce using rule 35 (EXPRESSAO -> numero comparacao variavel .)
-
-
-state 74
-
-    (37) FUNCAO -> ZERO abrePa variavel fechaPa .
-
-    ENQUANTO        reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    variavel        reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    ZERO            reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    EXECUTE         reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    SE              reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    AQUIACABOU      reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    FIMENQUANTO     reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    FIMSE           reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    SENAO           reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-    fechaPa         reduce using rule 37 (FUNCAO -> ZERO abrePa variavel fechaPa .)
-
-
-state 75
-
-    (38) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula . CMDS fechaPa
+    (29) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula . CMDS fechaPa
     (11) CMDS -> . CMD CMDS
     (12) CMDS -> . CMD
     (13) CMD -> . VARIAVEL igual variavel
@@ -994,10 +894,10 @@ state 75
     (17) CMD -> . FUNCAO
     (18) CMD -> . CONDICIONAL
     (4) VARIAVEL -> . variavel
-    (37) FUNCAO -> . ZERO abrePa variavel fechaPa
-    (38) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-    (39) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (28) FUNCAO -> . ZERO abrePa variavel fechaPa
+    (29) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (30) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
     ENQUANTO        shift and go to state 17
     variavel        shift and go to state 16
@@ -1005,22 +905,22 @@ state 75
     EXECUTE         shift and go to state 21
     SE              shift and go to state 22
 
-    CMDS                           shift and go to state 82
+    CMDS                           shift and go to state 68
     CMD                            shift and go to state 14
     VARIAVEL                       shift and go to state 15
     FUNCAO                         shift and go to state 18
     CONDICIONAL                    shift and go to state 19
 
-state 76
+state 62
 
-    (39) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS . FIMSE
-    (40) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS . SENAO CMDS FIMSE
+    (30) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS . FIMSE
+    (31) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS . SENAO CMDS FIMSE
 
-    FIMSE           shift and go to state 83
-    SENAO           shift and go to state 84
+    FIMSE           shift and go to state 69
+    SENAO           shift and go to state 70
 
 
-state 77
+state 63
 
     (19) OPERACAO -> VARIAVELOUNUMERO mais VARIAVELOUNUMERO .
 
@@ -1036,7 +936,7 @@ state 77
     fechaPa         reduce using rule 19 (OPERACAO -> VARIAVELOUNUMERO mais VARIAVELOUNUMERO .)
 
 
-state 78
+state 64
 
     (20) OPERACAO -> VARIAVELOUNUMERO vezes VARIAVELOUNUMERO .
 
@@ -1052,7 +952,7 @@ state 78
     fechaPa         reduce using rule 20 (OPERACAO -> VARIAVELOUNUMERO vezes VARIAVELOUNUMERO .)
 
 
-state 79
+state 65
 
     (21) OPERACAO -> VARIAVELOUNUMERO menos VARIAVELOUNUMERO .
 
@@ -1068,7 +968,7 @@ state 79
     fechaPa         reduce using rule 21 (OPERACAO -> VARIAVELOUNUMERO menos VARIAVELOUNUMERO .)
 
 
-state 80
+state 66
 
     (22) OPERACAO -> VARIAVELOUNUMERO dividido VARIAVELOUNUMERO .
 
@@ -1084,7 +984,7 @@ state 80
     fechaPa         reduce using rule 22 (OPERACAO -> VARIAVELOUNUMERO dividido VARIAVELOUNUMERO .)
 
 
-state 81
+state 67
 
     (16) CMD -> ENQUANTO VARIAVELOUEXPRESSAO FACA CMDS FIMENQUANTO .
 
@@ -1100,32 +1000,32 @@ state 81
     fechaPa         reduce using rule 16 (CMD -> ENQUANTO VARIAVELOUEXPRESSAO FACA CMDS FIMENQUANTO .)
 
 
-state 82
+state 68
 
-    (38) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS . fechaPa
+    (29) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS . fechaPa
 
-    fechaPa         shift and go to state 85
-
-
-state 83
-
-    (39) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .
-
-    ENQUANTO        reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    variavel        reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    ZERO            reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    EXECUTE         reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    SE              reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    AQUIACABOU      reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    FIMENQUANTO     reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    FIMSE           reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    SENAO           reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
-    fechaPa         reduce using rule 39 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    fechaPa         shift and go to state 71
 
 
-state 84
+state 69
 
-    (40) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO . CMDS FIMSE
+    (30) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .
+
+    ENQUANTO        reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    variavel        reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    ZERO            reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    EXECUTE         reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    SE              reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    AQUIACABOU      reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    FIMENQUANTO     reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    FIMSE           reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    SENAO           reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+    fechaPa         reduce using rule 30 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE .)
+
+
+state 70
+
+    (31) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO . CMDS FIMSE
     (11) CMDS -> . CMD CMDS
     (12) CMDS -> . CMD
     (13) CMD -> . VARIAVEL igual variavel
@@ -1135,10 +1035,10 @@ state 84
     (17) CMD -> . FUNCAO
     (18) CMD -> . CONDICIONAL
     (4) VARIAVEL -> . variavel
-    (37) FUNCAO -> . ZERO abrePa variavel fechaPa
-    (38) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
-    (39) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
-    (40) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
+    (28) FUNCAO -> . ZERO abrePa variavel fechaPa
+    (29) FUNCAO -> . EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa
+    (30) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS FIMSE
+    (31) CONDICIONAL -> . SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE
 
     ENQUANTO        shift and go to state 17
     variavel        shift and go to state 16
@@ -1146,47 +1046,47 @@ state 84
     EXECUTE         shift and go to state 21
     SE              shift and go to state 22
 
-    CMDS                           shift and go to state 86
+    CMDS                           shift and go to state 72
     CMD                            shift and go to state 14
     VARIAVEL                       shift and go to state 15
     FUNCAO                         shift and go to state 18
     CONDICIONAL                    shift and go to state 19
 
-state 85
+state 71
 
-    (38) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .
+    (29) FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .
 
-    ENQUANTO        reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    variavel        reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    ZERO            reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    EXECUTE         reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    SE              reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    AQUIACABOU      reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    FIMENQUANTO     reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    FIMSE           reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    SENAO           reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-    fechaPa         reduce using rule 38 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
-
-
-state 86
-
-    (40) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS . FIMSE
-
-    FIMSE           shift and go to state 87
+    ENQUANTO        reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    variavel        reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    ZERO            reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    EXECUTE         reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    SE              reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    AQUIACABOU      reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    FIMENQUANTO     reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    FIMSE           reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    SENAO           reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
+    fechaPa         reduce using rule 29 (FUNCAO -> EXECUTE abrePa VARIAVELOUNUMERO virgula CMDS fechaPa .)
 
 
-state 87
+state 72
 
-    (40) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .
+    (31) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS . FIMSE
 
-    ENQUANTO        reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    variavel        reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    ZERO            reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    EXECUTE         reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    SE              reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    AQUIACABOU      reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    FIMENQUANTO     reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    FIMSE           reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    SENAO           reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
-    fechaPa         reduce using rule 40 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    FIMSE           shift and go to state 73
+
+
+state 73
+
+    (31) CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .
+
+    ENQUANTO        reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    variavel        reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    ZERO            reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    EXECUTE         reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    SE              reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    AQUIACABOU      reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    FIMENQUANTO     reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    FIMSE           reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    SENAO           reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
+    fechaPa         reduce using rule 31 (CONDICIONAL -> SE VARIAVELOUEXPRESSAO ENTAO CMDS SENAO CMDS FIMSE .)
 

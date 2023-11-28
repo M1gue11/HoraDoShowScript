@@ -1,5 +1,5 @@
 RECEBA x = 4
-DEVOLVA z
+DEVOLVA g, y, x, oi
 HORADOSHOW
 EXECUTE(x, EXECUTE(x, z = z + x))
 AQUIACABOU

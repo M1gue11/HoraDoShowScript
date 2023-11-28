@@ -2,6 +2,8 @@ from ply.lex import lex
 from ply.yacc import yacc
 import re
 
+# Integrantes: Bruno Pimenta (2110717) e Miguel Angelus (2120640)
+
 # analisador lexico lex
 reservados = ("RECEBA", "DEVOLVA", "HORADOSHOW", "AQUIACABOU", 
               "SE", "ENTAO", "SENAO", "FIMSE", "ENQUANTO",  "FACA", "FIMENQUANTO", "virgula", "igual", 
@@ -84,13 +86,14 @@ def p_PROGRAM(regras):
                 varlist_nao_declarado_str += f"{var} = 0, "
     
     comandos = regras[6].replace("\t", "", 1)
+    print("OI", varlist_nao_declarado_str)
     regras[0] = f'''#include <stdio.h>
 int main(void){{
     /*PARAMETROS*/
     int {parametros};
 
     /*VARLIST*/
-    int {varlist_nao_declarado_str};
+    {f"int {varlist_nao_declarado_str};" if varlist_nao_declarado_str else ""}
     
     /*COMANDOS*/
     {comandos}
